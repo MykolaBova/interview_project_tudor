@@ -11,7 +11,7 @@ public class PlacesServiceImplTest implements PlacesService {
 
     public PlacesServiceImplTest() {
         citiesWithPlaces = new HashMap<>();
-        citiesWithPlaces.put("Pascani", Arrays.asList(new Place("1", "piata mijlocie"), new Place("2", "bufetul central")));
+        citiesWithPlaces.put("q", Arrays.asList(new Place("1", "piata mijlocie"), new Place("2", "bufetul central")));
         citiesWithPlaces.put("Oras gol", null);
         citiesWithPlaces.put("Copsa Mica", Arrays.asList(
                 new Place("100", "piata mijlocie"),

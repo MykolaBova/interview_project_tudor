@@ -30,17 +30,16 @@ public class Travel implements EntryPoint {
 	 * Entry point method.
 	 */
 	public void onModuleLoad() {
-		resetPlacesTable();
 
 		findPlacesPanel.add(cityTextBox);
 		findPlacesPanel.add(findPlacesButton);
 
 		mainPanel.add(findPlacesPanel);
+		placesTable.addStyleName("placesTable");
 		mainPanel.add(placesTable);
 		mainPanel.add(cityLabel);
 
 		RootPanel.get("city-places").add(mainPanel);
-
 
 		cityTextBox.setFocus(true);
 
@@ -83,5 +82,6 @@ public class Travel implements EntryPoint {
 		placesTable.removeAllRows();
 		placesTable.setText(0, 0, "Id");
 		placesTable.setText(0, 1, "Name");
+		placesTable.getRowFormatter().addStyleName(0,"tableHeader");
 	}
 }

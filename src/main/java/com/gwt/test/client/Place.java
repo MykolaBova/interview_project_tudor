@@ -1,6 +1,8 @@
 package com.gwt.test.client;
 
-public class Place {
+import java.io.Serializable;
+
+public class Place implements Serializable {
     private String id;
     private String name;
 

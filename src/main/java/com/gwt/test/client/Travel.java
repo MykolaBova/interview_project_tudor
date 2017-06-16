@@ -3,7 +3,9 @@ package com.gwt.test.client;
 import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -23,8 +25,7 @@ public class Travel implements EntryPoint {
 	private Button findPlacesButton = new Button("Find places");
 	private Label cityLabel = new Label();
 
-	//todo should be injected when using DI framework (impl should be on server-side)
-	private PlacesService placesService = new PlacesServiceImplTest();
+	private PlacesServiceAsync placesService;
 
 	/**
 	 * Entry point method.
@@ -60,25 +61,49 @@ public class Travel implements EntryPoint {
 		String city = cityTextBox.getText().trim();
 		if (!city.isEmpty()){
 			resetPlacesTable();
-			List<Place> cityPlaces = placesService.findByCity(city);
-			if (cityPlaces !=null) {
-				cityPlaces.forEach(place -> {
-					int row = placesTable.getRowCount();
-					placesTable.setText(row, 0, place.getId());
-					placesTable.setText(row, 1, place.getName());
-				});
 
-				cityLabel.setText("Showing places for " + city);
-			} else {
-				placesTable.removeAllRows();
-				cityLabel.setText("No valid city or no places " + city);
+            // Initialize the service proxy. //todo can this be injected when using DI
+            if (placesService == null) {
+                placesService = GWT.create(PlacesService.class);
+            }
 
-			}
+            // Make the call to the stock price service.
+            placesService.findByCity(city, createFindPlacesCallback(city));
 		}
 
 	}
 
-	private void resetPlacesTable() {
+	private AsyncCallback<List<Place>> createFindPlacesCallback(String city) {
+		return new AsyncCallback<List<Place>>() {
+			public void onFailure(Throwable caught) {
+				// TODO: Do something with errors.
+			}
+
+			@Override
+			public void onSuccess(List<Place> cityPlaces) {
+				updatePlaces(cityPlaces, city);
+			}
+
+		};
+	}
+
+    private void updatePlaces(List<Place> cityPlaces, String city) {
+        if (cityPlaces !=null) {
+            cityPlaces.forEach(place -> {
+                int row = placesTable.getRowCount();
+                placesTable.setText(row, 0, place.getId());
+                placesTable.setText(row, 1, place.getName());
+            });
+
+            cityLabel.setText("Showing places for " + city);
+        } else {
+            placesTable.removeAllRows();
+            cityLabel.setText("No valid city or no places " + city);
+
+        }
+    }
+
+    private void resetPlacesTable() {
 		placesTable.removeAllRows();
 		placesTable.setText(0, 0, "Id");
 		placesTable.setText(0, 1, "Name");

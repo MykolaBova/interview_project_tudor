@@ -10,13 +10,21 @@
     <servlet-name>greetServlet</servlet-name>
     <servlet-class>com.gwt.test.server.GreetingServiceImpl</servlet-class>
   </servlet>
-  
-  <servlet-mapping>
+    <servlet>
+        <servlet-name>com.gwt.test.Travel PlacesService</servlet-name>
+        <servlet-class>com.gwt.test.server.PlacesServiceImpl</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/travel/greet</url-pattern>
   </servlet-mapping>
-  
-  <!-- Default page to serve -->
+    <servlet-mapping>
+        <servlet-name>com.gwt.test.Travel PlacesService</servlet-name>
+        <url-pattern>/travel/places</url-pattern>
+    </servlet-mapping>
+
+    <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Travel.html</welcome-file>
   </welcome-file-list>

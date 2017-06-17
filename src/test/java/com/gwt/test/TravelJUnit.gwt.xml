@@ -10,6 +10,6 @@
   <inherits name='com.gwt.test.Travel'/>
 
   <!-- Specify the path to any remote services.                   -->
-  <servlet path="/travel/greet" class="com.gwt.test.server.GreetingServiceImpl" />
+  <servlet path="/travel/places" class="com.gwt.test.server.TravelPlacesServiceImpl" />
 
 </module>

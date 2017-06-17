@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.gwt.test.shared.Place;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -25,7 +26,7 @@ public class Travel implements EntryPoint {
 	private Button findPlacesButton = new Button("Find places");
 	private Label cityLabel = new Label();
 
-	private PlacesServiceAsync placesService;
+	private TravelPlacesServiceAsync travelService;
 
 	/**
 	 * Entry point method.
@@ -63,12 +64,12 @@ public class Travel implements EntryPoint {
 			resetPlacesTable();
 
             // Initialize the service proxy. //todo can this be injected when using DI
-            if (placesService == null) {
-                placesService = GWT.create(PlacesService.class);
+            if (travelService == null) {
+                travelService = GWT.create(TravelPlacesService.class);
             }
 
             // Make the call to the stock price service.
-            placesService.findByCity(city, createFindPlacesCallback(city));
+            travelService.findPlacesByCity(city, createFindPlacesCallback(city));
 		}
 
 	}

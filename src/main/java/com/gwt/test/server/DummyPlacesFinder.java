@@ -1,19 +1,21 @@
 package com.gwt.test.server;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.gwt.test.client.Place;
-import com.gwt.test.client.PlacesService;
+import com.gwt.test.shared.Place;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PlacesServiceImpl extends RemoteServiceServlet implements PlacesService {
+@Singleton
+public class DummyPlacesFinder implements PlacesFinder {
 
     private Map<String, List<Place>> citiesWithPlaces;
 
-    public PlacesServiceImpl() {
+    @Inject
+    public DummyPlacesFinder() {
         citiesWithPlaces = new HashMap<>();
         citiesWithPlaces.put("q", Arrays.asList(new Place("1", "piata mijlocie"), new Place("2", "bufetul central")));
         citiesWithPlaces.put("Oras gol", null);
@@ -24,7 +26,7 @@ public class PlacesServiceImpl extends RemoteServiceServlet implements PlacesSer
     }
 
     @Override
-    public List<Place> findByCity(String city) {
+    public List<Place> findPlacesByCity(String city) {
         return citiesWithPlaces.get(city);
     }
 }

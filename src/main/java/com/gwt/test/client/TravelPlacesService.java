@@ -2,11 +2,12 @@ package com.gwt.test.client;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.gwt.test.shared.Place;
 
 import java.util.List;
 
 @RemoteServiceRelativePath("places")
-public interface PlacesService extends RemoteService {
+public interface TravelPlacesService extends RemoteService {
 
-    List<Place> findByCity(String city);
+    List<Place> findPlacesByCity(String city);
 }

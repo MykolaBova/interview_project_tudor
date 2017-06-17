@@ -1,4 +1,4 @@
-package com.gwt.test.client;
+package com.gwt.test.shared;
 
 import java.io.Serializable;
 

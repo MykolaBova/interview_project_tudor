@@ -5,28 +5,33 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.gwt.test.server.GreetingServiceImpl</servlet-class>
-  </servlet>
+    <!-- Servlets -->
+<!--
     <servlet>
-        <servlet-name>com.gwt.test.Travel PlacesService</servlet-name>
-        <servlet-class>com.gwt.test.server.PlacesServiceImpl</servlet-class>
+        <servlet-name>com.gwt.test.Travel TravelService</servlet-name>
+        <servlet-class>com.gwt.test.server.TravelPlacesServiceImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/travel/greet</url-pattern>
-  </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>com.gwt.test.Travel PlacesService</servlet-name>
+        <servlet-name>com.gwt.test.Travel TravelService</servlet-name>
         <url-pattern>/travel/places</url-pattern>
     </servlet-mapping>
+-->
 
-    <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>Travel.html</welcome-file>
-  </welcome-file-list>
+    <!--GUICE SERVLET FILTER-->
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--GUICE LISTENER-->
+    <listener>
+        <listener-class>com.gwt.test.server.config.MyGuiceServletConfig</listener-class>
+    </listener>
 
 </web-app>

@@ -25,6 +25,7 @@ public class Travel implements EntryPoint {
 	private SuggestBox cityTextBox = new SuggestBox();
 	private Button findPlacesButton = new Button("Find places");
 	private Label cityLabel = new Label();
+	private Label errorLabel = new Label();
 
 	private TravelPlacesServiceAsync travelService;
 
@@ -35,6 +36,8 @@ public class Travel implements EntryPoint {
 
 		findPlacesPanel.add(cityTextBox);
 		findPlacesPanel.add(findPlacesButton);
+		errorLabel.addStyleName("serverResponseLabelError");
+		findPlacesPanel.add(errorLabel);
 
 		mainPanel.add(findPlacesPanel);
 		placesTable.addStyleName("placesTable");
@@ -77,11 +80,12 @@ public class Travel implements EntryPoint {
 	private AsyncCallback<List<Place>> createFindPlacesCallback(String city) {
 		return new AsyncCallback<List<Place>>() {
 			public void onFailure(Throwable caught) {
-				// TODO: Do something with errors.
+				errorLabel.setText(caught.getMessage());
 			}
 
 			@Override
 			public void onSuccess(List<Place> cityPlaces) {
+				errorLabel.setText("");
 				updatePlaces(cityPlaces, city);
 			}
 

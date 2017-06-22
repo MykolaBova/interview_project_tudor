@@ -1,14 +1,13 @@
 package com.gwt.test.server;
 
-import com.google.gwt.jsonp.client.JsonpRequestBuilder;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.google.inject.Singleton;
-import com.gwt.test.shared.Place;
-import com.gwt.test.client.TravelPlacesService;
+import java.util.List;
 
 import javax.inject.Inject;
 
-import java.util.List;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.inject.Singleton;
+import com.gwt.test.client.TravelPlacesService;
+import com.gwt.test.shared.Place;
 
 @Singleton
 public class TravelPlacesServiceImpl extends RemoteServiceServlet implements TravelPlacesService {

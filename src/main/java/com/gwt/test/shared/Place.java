@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Place implements Serializable {
     private String id;
     private String name;
+    private String address;
 
     public Place() {
     }
